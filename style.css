@@ -1,90 +1,42 @@
-/* Envelope Styles */
 .envelope {
   position: relative;
-  width: 340px;
-  height: 220px;
-  margin: 100px auto 30px;
-  background: #ffb6c1;
-  border: 2px solid #ff4d6d;
-  border-radius: 10px;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-  overflow: hidden;
+  width: 250px;
+  height: 180px;
+  margin: 50px auto;
+  perspective: 1000px;
   cursor: pointer;
-  animation: float 3s ease-in-out infinite;
-  z-index: 3;
 }
 
-.envelope .flap {
+.envelope-front,
+.envelope-back {
   position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
-  height: 50%;
-  background: #ff4d6d;
-  transform-origin: top;
-  transition: transform 1s ease;
+  height: 100%;
+  border: 2px solid #ff6b6b;
+  border-radius: 10px;
+  background: #fff;
+  transition: transform 1s;
 }
 
-.envelope.open .flap {
+.envelope.open .envelope-front {
   transform: rotateX(-180deg);
 }
 
-.envelope .letter {
+.letter {
   position: absolute;
-  bottom: -120%;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: #fffaf0;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  background: #fffbea;
   padding: 20px;
-  text-align: center;
-  font-size: 14px;
-  line-height: 1.5em;
-  transition: bottom 1s ease;
-  border-top: 3px solid #ff4d6d;
-  overflow-y: auto;
+  border-radius: 8px;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 1s, transform 1s;
+  z-index: 2;
 }
 
 .envelope.open .letter {
-  bottom: 0;
-}
-
-.envelope h2 {
-  color: #ff4d6d;
-  margin-bottom: 10px;
-}
-
-/* Slideshow inside letter */
-.letter-slideshow {
-  margin-top: 15px;
-  position: relative;
-  max-width: 100%;
-  height: 150px;
-  overflow: hidden;
-}
-
-.letter-slideshow img {
-  width: 100%;
-  height: 150px;
-  object-fit: cover;
-  border-radius: 8px;
-}
-
-.slide {
-  display: none;
-}
-
-.fade {
-  animation: fade 1.5s;
-}
-
-@keyframes fade {
-  from { opacity: 0.4; }
-  to { opacity: 1; }
-}
-
-/* Floating Envelope Animation */
-@keyframes float {
-  0%,100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+  opacity: 1;
+  transform: translateY(0);
 }
