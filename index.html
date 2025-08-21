@@ -6,21 +6,20 @@
 <title>Special Birthday Surprise</title>
 <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 <style>
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body, html { height: 100%; width: 100%; overflow: hidden; font-family: 'Montserrat', sans-serif; }
+* { margin:0; padding:0; box-sizing:border-box; }
+html, body { height:100%; width:100%; font-family: 'Montserrat', sans-serif; overflow:hidden; }
 
- #landing {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  width: 100%;
+/* Landing Page */
+#landing {
+  position: fixed;
+  top:0; left:0; width:100%; height:100%;
   background: linear-gradient(135deg, #ffecd2, #fcb69f);
+  display:flex;
   flex-direction: column;
-  text-align: center;
-  transition: opacity 0.5s ease;
+  justify-content:center;
+  align-items:center;
   z-index: 10;
-  position: relative;
+  transition: opacity 0.5s ease;
 }
 
 #landing h1 {
@@ -28,7 +27,7 @@
   font-size: 3rem;
   color: #ff4f79;
   margin-bottom: 40px;
-  letter-spacing: 1px;
+  text-align: center;
 }
 
 #start-btn {
@@ -47,74 +46,73 @@
   box-shadow: 0 10px 25px rgba(0,0,0,0.3);
 }
 
-  /* Birthday card page */
-  #card-page {
-    display: none;
-    height: 100%;
-    width: 100%;
-    position: relative;
-    background: linear-gradient(135deg, #ffecd2, #fcb69f);
-    overflow: hidden;
-  }
+/* Card Page */
+#card-page {
+  display: none;
+  width:100%; height:100%;
+  position: relative;
+  background: linear-gradient(135deg, #ffecd2, #fcb69f);
+  overflow:hidden;
+}
 
-  /* Floating card */
-  .card {
-    position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    background: rgba(255,255,255,0.9);
-    border-radius: 25px;
-    width: 380px;
-    max-width: 90%;
-    padding: 40px 30px 60px;
-    text-align: center;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.25);
-    animation: floatCard 4s ease-in-out infinite;
-  }
-  @keyframes floatCard {
-    0%,100% { transform: translate(-50%,-50%) translateY(0px) rotate(-1deg); }
-    50% { transform: translate(-50%,-50%) translateY(-10px) rotate(1deg); }
-  }
-  h2 { font-family: 'Pacifico', cursive; color: #ff4f79; font-size: 2.4rem; margin-bottom: 15px; }
-  p { font-size: 1.1rem; margin-bottom: 25px; color: #555; }
+/* Floating Card */
+.card {
+  position:absolute;
+  top:50%; left:50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255,255,255,0.9);
+  border-radius: 25px;
+  width:380px; max-width:90%;
+  padding:40px 30px 60px;
+  text-align:center;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+  animation: floatCard 4s ease-in-out infinite;
+}
+@keyframes floatCard {
+  0%,100% { transform: translate(-50%, -50%) translateY(0px) rotate(-1deg);}
+  50% { transform: translate(-50%, -50%) translateY(-10px) rotate(1deg);}
+}
+.card h2 { font-family: 'Pacifico', cursive; color: #ff4f79; font-size:2.4rem; margin-bottom:15px;}
+.card p { font-size:1.1rem; color:#555; margin-bottom:25px; }
 
-  /* Candle */
-  .candle { width:10px; height:40px; background:#ffcc00; margin:0 auto 15px; border-radius:3px; position:relative; }
-  .flame { width:10px; height:15px; background: radial-gradient(circle,#fffc00 0%,#ff7b00 70%); position:absolute; top:-15px; left:0; border-radius:50%; animation:flicker 0.3s infinite alternate; }
-  @keyframes flicker { 0%{transform:scale(1) translateX(0);opacity:1;} 50%{transform:scale(1.2) translateX(-1px);opacity:0.8;} 100%{transform:scale(0.9) translateX(1px);opacity:1;} }
+/* Candle */
+.candle { width:10px; height:40px; background:#ffcc00; margin:0 auto 15px; border-radius:3px; position:relative;}
+.flame { width:10px; height:15px; background: radial-gradient(circle,#fffc00 0%,#ff7b00 70%); position:absolute; top:-15px; left:0; border-radius:50%; animation:flicker 0.3s infinite alternate;}
+@keyframes flicker { 0%{transform:scale(1) translateX(0);opacity:1;} 50%{transform:scale(1.2) translateX(-1px);opacity:0.8;} 100%{transform:scale(0.9) translateX(1px);opacity:1;} }
 
-  /* Stars */
-  .star { position:absolute; width:2px; height:2px; background:white; border-radius:50%; opacity:0; animation:twinkle 2s infinite alternate; }
-  @keyframes twinkle { 0%{opacity:0; transform:scale(0.5);} 50%{opacity:1; transform:scale(1.2);} 100%{opacity:0; transform:scale(0.5);} }
+/* Stars */
+.star { position:absolute; width:2px; height:2px; background:white; border-radius:50%; opacity:0; animation:twinkle 2s infinite alternate;}
+@keyframes twinkle { 0%{opacity:0; transform:scale(0.5);} 50%{opacity:1; transform:scale(1.2);} 100%{opacity:0; transform:scale(0.5);} }
 
-  /* Confetti */
-  .confetti { position:absolute; width:8px; height:8px; border-radius:50%; top:-10px; animation:fall linear infinite; }
-  @keyframes fall { to { transform:translateY(110vh) rotate(360deg); opacity:0;} }
+/* Confetti */
+.confetti { position:absolute; width:8px; height:8px; border-radius:50%; top:-10px; animation:fall linear infinite;}
+@keyframes fall { to { transform:translateY(110vh) rotate(360deg); opacity:0;} }
 
-  /* Balloons */
-  .balloon { position:absolute; width:30px; height:40px; border-radius:50%; opacity:0.9; animation: floatUp linear infinite; }
-  @keyframes floatUp { 0%{transform:translateY(100vh) rotate(0deg);} 100%{transform:translateY(-150px) rotate(360deg);} }
+/* Balloons */
+.balloon { position:absolute; width:30px; height:40px; border-radius:50%; opacity:0.9; animation: floatUp linear infinite;}
+@keyframes floatUp { 0%{transform:translateY(100vh) rotate(0deg);} 100%{transform:translateY(-150px) rotate(360deg);} }
 
-  /* Sparkles */
-  .sparkle { position:absolute; width:5px; height:5px; background:yellow; border-radius:50%; opacity:0; animation:sparkle 1s infinite alternate; }
-  @keyframes sparkle { 0%{opacity:0; transform:scale(0.5);} 100%{opacity:1; transform:scale(1.5);} }
+/* Sparkles */
+.sparkle { position:absolute; width:5px; height:5px; background:yellow; border-radius:50%; opacity:0; animation:sparkle 1s infinite alternate;}
+@keyframes sparkle { 0%{opacity:0; transform:scale(0.5);} 100%{opacity:1; transform:scale(1.5);} }
 
-  /* Floating hearts */
-  .heart { position:absolute; width:15px; height:15px; background:red; transform:rotate(-45deg); animation:floatHeart linear forwards; }
-  .heart::before,.heart::after{ content:''; position:absolute; width:15px; height:15px; background:red; border-radius:50%; }
-  .heart::before{ top:-7.5px; left:0; } .heart::after{ left:7.5px; top:0; }
-  @keyframes floatHeart { 0%{ transform:translateY(0) rotate(-45deg); opacity:1; } 100%{ transform:translateY(-300px) rotate(0deg); opacity:0; } }
+/* Floating hearts */
+.heart { position:absolute; width:15px; height:15px; background:red; transform:rotate(-45deg); animation:floatHeart linear forwards;}
+.heart::before,.heart::after{ content:''; position:absolute; width:15px; height:15px; background:red; border-radius:50%;}
+.heart::before{ top:-7.5px; left:0; } .heart::after{ left:7.5px; top:0; }
+@keyframes floatHeart { 0%{ transform:translateY(0) rotate(-45deg); opacity:1; } 100%{ transform:translateY(-300px) rotate(0deg); opacity:0; } }
+
 </style>
 </head>
 <body>
 
-<!-- Landing page -->
+<!-- Landing Page -->
 <div id="landing">
   <h1>Happy Birthday, My Love!</h1>
   <button id="start-btn">Open Your Birthday Card 🎁</button>
 </div>
 
-<!-- Card page -->
+<!-- Card Page -->
 <div id="card-page">
   <div class="card">
     <div class="candle"><div class="flame"></div></div>
