@@ -151,8 +151,18 @@
   <p>May your day be filled with laughter, love, and endless joy. You deserve the world!</p>
 </div>
 
+<!-- Background Music -->
+<audio id="bg-music" autoplay loop>
+  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_7b50d0b2e6.mp3?filename=happy-birthday-121351.mp3" type="audio/mpeg">
+</audio>
+
+<!-- Balloon Pop Sound -->
+<audio id="pop-sound">
+  <source src="https://freesound.org/data/previews/146/146725_2615114-lq.mp3" type="audio/mpeg">
+</audio>
+
 <script>
-  // Stars in the background
+  // Stars
   for(let i=0;i<100;i++){
     const star = document.createElement('div');
     star.className='star';
@@ -162,7 +172,8 @@
     document.body.appendChild(star);
   }
 
-  // Function to generate confetti, balloons, and sparkles continuously
+  const popSound = document.getElementById('pop-sound');
+
   function spawnMagic(){
     // Confetti
     for(let i=0;i<5;i++){
@@ -184,7 +195,13 @@
       balloon.style.background=`hsl(${Math.random()*360},70%,60%)`;
       balloon.style.animationDuration=(Math.random()*5+5)+'s';
       document.body.appendChild(balloon);
-      setTimeout(()=>balloon.remove(),9000);
+
+      // Play pop sound after balloon floats for a while
+      setTimeout(()=>{
+        popSound.currentTime = 0;
+        popSound.play();
+        balloon.remove();
+      }, Math.random()*5000 + 3000); // pops after 3-8 sec
     }
 
     // Sparkles
@@ -199,9 +216,9 @@
     }
   }
 
-  // Spawn magic every 500ms automatically
+  // Continuously spawn magic every 500ms
   setInterval(spawnMagic, 500);
-
 </script>
+
 </body>
 </html>
