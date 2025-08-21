@@ -9,41 +9,43 @@
   * { margin:0; padding:0; box-sizing:border-box; }
   body, html { height: 100%; width: 100%; overflow: hidden; font-family: 'Montserrat', sans-serif; }
 
-  /* Initial page styles */
-  #landing {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    width: 100%;
-    background: linear-gradient(135deg, #ffecd2, #fcb69f);
-    flex-direction: column;
-    text-align: center;
-    transition: opacity 0.5s ease;
-  }
+ #landing {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(135deg, #ffecd2, #fcb69f);
+  flex-direction: column;
+  text-align: center;
+  transition: opacity 0.5s ease;
+  z-index: 10;
+  position: relative;
+}
 
-  #landing h1 {
-    font-family: 'Pacifico', cursive;
-    font-size: 3rem;
-    color: #ff4f79;
-    margin-bottom: 20px;
-    letter-spacing: 1px;
-  }
+#landing h1 {
+  font-family: 'Pacifico', cursive;
+  font-size: 3rem;
+  color: #ff4f79;
+  margin-bottom: 40px;
+  letter-spacing: 1px;
+}
 
-  #start-btn {
-    padding: 15px 30px;
-    font-size: 1.2rem;
-    color: white;
-    background: linear-gradient(45deg, #ff6fa3, #ffca7b);
-    border: none;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: transform 0.3s, box-shadow 0.3s;
-  }
-  #start-btn:hover {
-    transform: scale(1.1);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-  }
+#start-btn {
+  padding: 20px 40px;
+  font-size: 1.5rem;
+  color: white;
+  background: linear-gradient(45deg, #ff6fa3, #ffca7b);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+#start-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
 
   /* Birthday card page */
   #card-page {
