@@ -39,11 +39,17 @@ html, body { height:100%; width:100%; font-family: 'Montserrat', sans-serif; ove
   border-radius: 50px;
   cursor: pointer;
   transition: transform 0.3s, box-shadow 0.3s;
+  animation: pulse 2s infinite;
 }
 
 #start-btn:hover {
   transform: scale(1.1);
   box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
 }
 
 /* Card Page */
@@ -101,7 +107,6 @@ html, body { height:100%; width:100%; font-family: 'Montserrat', sans-serif; ove
 .heart::before,.heart::after{ content:''; position:absolute; width:15px; height:15px; background:red; border-radius:50%;}
 .heart::before{ top:-7.5px; left:0; } .heart::after{ left:7.5px; top:0; }
 @keyframes floatHeart { 0%{ transform:translateY(0) rotate(-45deg); opacity:1; } 100%{ transform:translateY(-300px) rotate(0deg); opacity:0; } }
-
 </style>
 </head>
 <body>
@@ -119,7 +124,7 @@ html, body { height:100%; width:100%; font-family: 'Montserrat', sans-serif; ove
     <h2>Happy Birthday, Love!</h2>
     <p>May your day be filled with laughter, love, and endless joy. You deserve the world!</p>
   </div>
-  <audio id="bg-music" autoplay loop>
+  <audio id="bg-music" loop>
     <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_7b50d0b2e6.mp3?filename=happy-birthday-121351.mp3" type="audio/mpeg">
   </audio>
   <audio id="pop-sound">
@@ -128,81 +133,84 @@ html, body { height:100%; width:100%; font-family: 'Montserrat', sans-serif; ove
 </div>
 
 <script>
-const landing = document.getElementById('landing');
-const cardPage = document.getElementById('card-page');
-const startBtn = document.getElementById('start-btn');
-const popSound = document.getElementById('pop-sound');
+document.addEventListener("DOMContentLoaded", function() {
+  const landing = document.getElementById('landing');
+  const cardPage = document.getElementById('card-page');
+  const startBtn = document.getElementById('start-btn');
+  const popSound = document.getElementById('pop-sound');
+  const bgMusic = document.getElementById('bg-music');
 
-startBtn.onclick = () => {
-  landing.style.opacity = 0;
-  setTimeout(()=>{
-    landing.style.display='none';
-    cardPage.style.display='block';
-    initCardAnimations();
-  },500);
-}
-
-function initCardAnimations(){
-  // Stars
-  for(let i=0;i<100;i++){
-    const star=document.createElement('div');
-    star.className='star';
-    star.style.left=Math.random()*window.innerWidth+'px';
-    star.style.top=Math.random()*window.innerHeight+'px';
-    star.style.animationDuration=(Math.random()*3+1)+'s';
-    cardPage.appendChild(star);
+  startBtn.onclick = () => {
+    landing.style.opacity = 0;
+    bgMusic.play(); // Start music after click (GitHub Pages autoplay-safe)
+    setTimeout(()=>{
+      landing.style.display='none';
+      cardPage.style.display='block';
+      initCardAnimations();
+    },500);
   }
 
-  // Spawn magic
-  function spawnMagic(){
-    // Confetti
-    for(let i=0;i<5;i++){
-      const confetti=document.createElement('div');
-      confetti.className='confetti';
-      confetti.style.left=Math.random()*window.innerWidth+'px';
-      confetti.style.background=`hsl(${Math.random()*360},80%,70%)`;
-      confetti.style.width=confetti.style.height=(Math.random()*12+6)+'px';
-      confetti.style.animationDuration=(Math.random()*3+2)+'s';
-      cardPage.appendChild(confetti);
-      setTimeout(()=>confetti.remove(),4000);
+  function initCardAnimations(){
+    // Stars
+    for(let i=0;i<100;i++){
+      const star=document.createElement('div');
+      star.className='star';
+      star.style.left=Math.random()*window.innerWidth+'px';
+      star.style.top=Math.random()*window.innerHeight+'px';
+      star.style.animationDuration=(Math.random()*3+1)+'s';
+      cardPage.appendChild(star);
     }
 
-    // Balloons + pop + hearts
-    for(let i=0;i<2;i++){
-      const balloon=document.createElement('div');
-      balloon.className='balloon';
-      balloon.style.left=Math.random()*window.innerWidth+'px';
-      balloon.style.background=`hsl(${Math.random()*360},70%,60%)`;
-      balloon.style.animationDuration=(Math.random()*5+5)+'s';
-      cardPage.appendChild(balloon);
+    function spawnMagic(){
+      // Confetti
+      for(let i=0;i<5;i++){
+        const confetti=document.createElement('div');
+        confetti.className='confetti';
+        confetti.style.left=Math.random()*window.innerWidth+'px';
+        confetti.style.background=`hsl(${Math.random()*360},80%,70%)`;
+        confetti.style.width=confetti.style.height=(Math.random()*12+6)+'px';
+        confetti.style.animationDuration=(Math.random()*3+2)+'s';
+        cardPage.appendChild(confetti);
+        setTimeout(()=>confetti.remove(),4000);
+      }
 
-      setTimeout(()=>{
-        popSound.currentTime=0; popSound.play();
-        balloon.remove();
+      // Balloons + hearts
+      for(let i=0;i<2;i++){
+        const balloon=document.createElement('div');
+        balloon.className='balloon';
+        balloon.style.left=Math.random()*window.innerWidth+'px';
+        balloon.style.background=`hsl(${Math.random()*360},70%,60%)`;
+        balloon.style.animationDuration=(Math.random()*5+5)+'s';
+        cardPage.appendChild(balloon);
 
-        const heart=document.createElement('div');
-        heart.className='heart';
-        heart.style.left=(parseInt(balloon.style.left)+10)+'px';
-        heart.style.top=(window.innerHeight-50)+'px';
-        cardPage.appendChild(heart);
-        setTimeout(()=>heart.remove(),4000);
-      }, Math.random()*5000 + 3000);
+        setTimeout(()=>{
+          popSound.currentTime=0; popSound.play();
+          balloon.remove();
+
+          const heart=document.createElement('div');
+          heart.className='heart';
+          heart.style.left=(parseInt(balloon.style.left)+10)+'px';
+          heart.style.top=(window.innerHeight-50)+'px';
+          cardPage.appendChild(heart);
+          setTimeout(()=>heart.remove(),4000);
+        }, Math.random()*5000 + 3000);
+      }
+
+      // Sparkles
+      for(let i=0;i<5;i++){
+        const sparkle=document.createElement('div');
+        sparkle.className='sparkle';
+        sparkle.style.left=Math.random()*window.innerWidth+'px';
+        sparkle.style.top=Math.random()*window.innerHeight+'px';
+        sparkle.style.animationDuration=(Math.random()*2+0.5)+'s';
+        cardPage.appendChild(sparkle);
+        setTimeout(()=>sparkle.remove(),2500);
+      }
     }
 
-    // Sparkles
-    for(let i=0;i<5;i++){
-      const sparkle=document.createElement('div');
-      sparkle.className='sparkle';
-      sparkle.style.left=Math.random()*window.innerWidth+'px';
-      sparkle.style.top=Math.random()*window.innerHeight+'px';
-      sparkle.style.animationDuration=(Math.random()*2+0.5)+'s';
-      cardPage.appendChild(sparkle);
-      setTimeout(()=>sparkle.remove(),2500);
-    }
+    setInterval(spawnMagic,500);
   }
-
-  setInterval(spawnMagic,500);
-}
+});
 </script>
 
 </body>
