@@ -1,24 +1,217 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Happy Birthday Love 💖</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday!</title>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    height: 100vh;
+    width: 100vw;
+    background: linear-gradient(135deg, #ffecd2, #fcb69f);
+    font-family: 'Montserrat', sans-serif;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* Floating stars */
+  .star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: white;
+    border-radius: 50%;
+    opacity: 0;
+    animation: twinkle 2s infinite alternate;
+  }
+
+  @keyframes twinkle {
+    0% { opacity:0; transform: scale(0.5);}
+    50% { opacity:1; transform: scale(1.2);}
+    100% { opacity:0; transform: scale(0.5);}
+  }
+
+  /* Card styling */
+  .card {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 25px;
+    width: 380px;
+    max-width: 90%;
+    padding: 40px 30px 60px;
+    text-align: center;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+    animation: popIn 1s forwards;
+  }
+
+  @keyframes popIn { to { transform: translate(-50%, -50%) scale(1); } }
+
+  h1 {
+    font-family: 'Pacifico', cursive;
+    color: #ff4f79;
+    font-size: 2.4rem;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+  }
+
+  p {
+    font-size: 1.1rem;
+    margin-bottom: 25px;
+    color: #555;
+  }
+
+  .button {
+    background: linear-gradient(45deg, #ff6fa3, #ffca7b);
+    padding: 12px 25px;
+    border: none;
+    border-radius: 50px;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.3s ease;
+  }
+
+  .button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  }
+
+  /* Candle flame */
+  .candle {
+    width: 10px;
+    height: 40px;
+    background: #ffcc00;
+    margin: 0 auto 15px;
+    border-radius: 3px;
+    position: relative;
+  }
+
+  .flame {
+    width: 10px;
+    height: 15px;
+    background: radial-gradient(circle, #fffc00 0%, #ff7b00 70%);
+    position: absolute;
+    top: -15px;
+    left: 0;
+    border-radius: 50%;
+    animation: flicker 0.3s infinite alternate;
+  }
+
+  @keyframes flicker {
+    0% { transform: scale(1) translateX(0); opacity: 1; }
+    50% { transform: scale(1.2) translateX(-1px); opacity: 0.8; }
+    100% { transform: scale(0.9) translateX(1px); opacity: 1; }
+  }
+
+  /* Confetti */
+  .confetti {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    top: -10px;
+    animation: fall linear infinite;
+  }
+
+  @keyframes fall {
+    to {
+      transform: translateY(110vh) rotate(360deg);
+      opacity: 0;
+    }
+  }
+
+  /* Balloons */
+  .balloon {
+    position: absolute;
+    width: 30px;
+    height: 40px;
+    border-radius: 50%;
+    opacity: 0.9;
+    animation: floatUp linear infinite;
+  }
+
+  @keyframes floatUp {
+    0% { transform: translateY(100vh) rotate(0deg); }
+    100% { transform: translateY(-150px) rotate(360deg); }
+  }
+
+  /* Sparkles */
+  .sparkle {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background: yellow;
+    border-radius: 50%;
+    opacity: 0;
+    animation: sparkle 1s infinite alternate;
+  }
+
+  @keyframes sparkle {
+    0% { opacity: 0; transform: scale(0.5);}
+    100% { opacity: 1; transform: scale(1.5);}
+  }
+</style>
 </head>
 <body>
 
-  <div class="envelope" id="envelope">
-    <div class="heart-emoji" id="heartSeal">❤️</div>
-    <div class="envelope-front"></div>
-    <div class="envelope-back"></div>
-    <div class="letter">
-      <h2>Happy Birthday, My Love 💖</h2>
-      <p>Wishing you endless happiness, love, and joy today & always.  
-      You are my sunshine, my safe place, and my forever. 💕</p>
-    </div>
-  </div>
+<div class="card">
+  <div class="candle"><div class="flame"></div></div>
+  <h1>Happy Birthday, Love!</h1>
+  <p>May your day be filled with laughter, love, and endless joy. You deserve the world!</p>
+  <button class="button" onclick="celebrate()">🎉 Celebrate!</button>
+</div>
 
-  <script src="script.js"></script>
+<script>
+  // Generate stars in background
+  for(let i=0;i<100;i++){
+    const star = document.createElement('div');
+    star.className='star';
+    star.style.left = Math.random()*window.innerWidth+'px';
+    star.style.top = Math.random()*window.innerHeight+'px';
+    star.style.animationDuration=(Math.random()*3+1)+'s';
+    document.body.appendChild(star);
+  }
+
+  function celebrate(){
+    // Confetti
+    for(let i=0;i<30;i++){
+      const confetti=document.createElement('div');
+      confetti.className='confetti';
+      confetti.style.left=Math.random()*window.innerWidth+'px';
+      confetti.style.background=`hsl(${Math.random()*360},80%,70%)`;
+      confetti.style.width=confetti.style.height=(Math.random()*12+6)+'px';
+      confetti.style.animationDuration=(Math.random()*3+2)+'s';
+      document.body.appendChild(confetti);
+      setTimeout(()=>confetti.remove(),4000);
+    }
+
+    // Balloons
+    for(let i=0;i<10;i++){
+      const balloon=document.createElement('div');
+      balloon.className='balloon';
+      balloon.style.left=Math.random()*window.innerWidth+'px';
+      balloon.style.background=`hsl(${Math.random()*360},70%,60%)`;
+      balloon.style.animationDuration=(Math.random()*5+5)+'s';
+      document.body.appendChild(balloon);
+      setTimeout(()=>balloon.remove(),9000);
+    }
+
+    // Sparkles
+    for(let i=0;i<40;i++){
+      const sparkle=document.createElement('div');
+      sparkle.className='sparkle';
+      sparkle.style.left=Math.random()*window.innerWidth+'px';
+      sparkle.style.top=Math.random()*window.innerHeight+'px';
+      sparkle.style.animationDuration=(Math.random()*2+0.5)+'s';
+      document.body.appendChild(sparkle);
+      setTimeout(()=>sparkle.remove(),2500);
+    }
+  }
+</script>
+
 </body>
 </html>
