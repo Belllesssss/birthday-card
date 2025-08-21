@@ -7,17 +7,28 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <!-- Balloons Background -->
+  <div class="balloon" style="left:10%; background:#ff6b6b; animation-delay:0s;"></div>
+  <div class="balloon" style="left:25%; background:#feca57; animation-delay:2s;"></div>
+  <div class="balloon" style="left:40%; background:#48dbfb; animation-delay:4s;"></div>
+  <div class="balloon" style="left:60%; background:#1dd1a1; animation-delay:1s;"></div>
+  <div class="balloon" style="left:80%; background:#5f27cd; animation-delay:3s;"></div>
+
+  <!-- Birthday Card -->
   <div class="card">
     <h1>🎂 Happy Birthday! 🎉</h1>
-    <p id="wish">Wishing you a day filled with love, laughter, and joy. 💖</p>
+    <p id="wish">Wishing you a day filled with love, laughter, and joy 💖</p>
     <input type="text" id="nameInput" placeholder="Enter your name">
     <button onclick="showWish()">Show My Wish</button>
   </div>
 
+  <!-- Confetti Button -->
   <button id="confettiBtn">🎊 Celebrate!</button>
 
+  <!-- Birthday Song -->
   <audio id="song" src="https://www2.cs.uic.edu/~i101/SoundFiles/StarWars60.wav"></audio>
 
+  <!-- Confetti Library -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <script src="script.js"></script>
 </body>
