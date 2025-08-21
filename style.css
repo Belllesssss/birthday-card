@@ -98,3 +98,65 @@ button.small{padding:8px 12px; font-size:.9rem}
   .letter-panel{max-height:none; opacity:1; padding:0}
   .letter-text{border:none; padding:0}
 }
+
+/* Envelope */
+.envelope {
+  position: relative;
+  width: 320px;
+  height: 200px;
+  margin: 100px auto 30px;
+  background: #ffb6c1;
+  border: 2px solid #ff4d6d;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+  overflow: hidden;
+  cursor: pointer;
+  animation: float 3s ease-in-out infinite;
+  z-index: 3;
+}
+
+.envelope .flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background: #ff4d6d;
+  transform-origin: top;
+  transition: transform 1s ease;
+}
+
+.envelope.open .flap {
+  transform: rotateX(-180deg);
+}
+
+.envelope .letter {
+  position: absolute;
+  bottom: -100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #fffaf0;
+  padding: 20px;
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.5em;
+  transition: bottom 1s ease;
+  border-top: 3px solid #ff4d6d;
+}
+
+.envelope.open .letter {
+  bottom: 0;
+}
+
+.envelope h2 {
+  color: #ff4d6d;
+  margin-bottom: 10px;
+}
+
+/* Floating effect */
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
