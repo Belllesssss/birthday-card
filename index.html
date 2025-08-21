@@ -37,7 +37,7 @@
   .card {
     position: absolute;
     top: 50%; left: 50%;
-    transform: translate(-50%, -50%) scale(0);
+    transform: translate(-50%, -50%);
     background: rgba(255, 255, 255, 0.9);
     border-radius: 25px;
     width: 380px;
@@ -45,10 +45,13 @@
     padding: 40px 30px 60px;
     text-align: center;
     box-shadow: 0 15px 35px rgba(0,0,0,0.25);
-    animation: popIn 1s forwards;
+    animation: floatCard 4s ease-in-out infinite;
   }
 
-  @keyframes popIn { to { transform: translate(-50%, -50%) scale(1); } }
+  @keyframes floatCard {
+    0%, 100% { transform: translate(-50%, -50%) translateY(0px) rotate(-1deg); }
+    50% { transform: translate(-50%, -50%) translateY(-10px) rotate(1deg); }
+  }
 
   h1 {
     font-family: 'Pacifico', cursive;
@@ -62,22 +65,6 @@
     font-size: 1.1rem;
     margin-bottom: 25px;
     color: #555;
-  }
-
-  .button {
-    background: linear-gradient(45deg, #ff6fa3, #ffca7b);
-    padding: 12px 25px;
-    border: none;
-    border-radius: 50px;
-    color: white;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: 0.3s ease;
-  }
-
-  .button:hover {
-    transform: scale(1.1);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
   }
 
   /* Candle flame */
@@ -162,11 +149,10 @@
   <div class="candle"><div class="flame"></div></div>
   <h1>Happy Birthday, Love!</h1>
   <p>May your day be filled with laughter, love, and endless joy. You deserve the world!</p>
-  <button class="button" onclick="celebrate()">🎉 Celebrate!</button>
 </div>
 
 <script>
-  // Generate stars in background
+  // Stars in the background
   for(let i=0;i<100;i++){
     const star = document.createElement('div');
     star.className='star';
@@ -176,9 +162,10 @@
     document.body.appendChild(star);
   }
 
-  function celebrate(){
+  // Function to generate confetti, balloons, and sparkles continuously
+  function spawnMagic(){
     // Confetti
-    for(let i=0;i<30;i++){
+    for(let i=0;i<5;i++){
       const confetti=document.createElement('div');
       confetti.className='confetti';
       confetti.style.left=Math.random()*window.innerWidth+'px';
@@ -190,7 +177,7 @@
     }
 
     // Balloons
-    for(let i=0;i<10;i++){
+    for(let i=0;i<2;i++){
       const balloon=document.createElement('div');
       balloon.className='balloon';
       balloon.style.left=Math.random()*window.innerWidth+'px';
@@ -201,7 +188,7 @@
     }
 
     // Sparkles
-    for(let i=0;i<40;i++){
+    for(let i=0;i<5;i++){
       const sparkle=document.createElement('div');
       sparkle.className='sparkle';
       sparkle.style.left=Math.random()*window.innerWidth+'px';
@@ -211,7 +198,10 @@
       setTimeout(()=>sparkle.remove(),2500);
     }
   }
-</script>
 
+  // Spawn magic every 500ms automatically
+  setInterval(spawnMagic, 500);
+
+</script>
 </body>
 </html>
