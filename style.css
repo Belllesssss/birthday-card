@@ -1,109 +1,8 @@
-/* Layout */
-:root{
-  --pink:#ff4d6d;
-  --pink-dark:#ff2e63;
-  --sky:#48dbfb;
-  --glass: rgba(255,255,255,.9);
-  --shadow: 0 12px 30px rgba(0,0,0,.25);
-}
-
-*{box-sizing:border-box}
-body{
-  margin:0; height:100vh; display:flex; justify-content:center; align-items:center;
-  background: linear-gradient(135deg,#ff9a9e,#fad0c4,#fbc2eb,#a6c1ee);
-  background-size:400% 400%; animation:gradientBG 12s ease infinite;
-  font-family: "Poppins", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-  text-align:center; overflow:hidden; color:#333;
-}
-@keyframes gradientBG{
-  0%{background-position:0% 50%}
-  50%{background-position:100% 50%}
-  100%{background-position:0% 50%}
-}
-
-/* Canvas */
-#balloonCanvas{position:fixed; inset:0; z-index:1}
-
-/* Card */
-.card{
-  position:relative; z-index:2; background:var(--glass); padding:32px; border-radius:26px;
-  box-shadow:var(--shadow); animation:fadeIn 900ms ease; width:min(92vw, 560px);
-}
-@keyframes fadeIn{from{opacity:0; transform:translateY(8px) scale(.98)} to{opacity:1; transform:none}}
-
-h1{font-size:2.3rem; margin:0 0 8px; color:var(--pink); text-shadow:2px 2px 5px rgba(0,0,0,.15)}
-#wish{font-size:1.15rem; margin:0 0 18px}
-
-.inputs{display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin-bottom:14px}
-input{
-  padding:12px 14px; border:2px solid var(--pink); border-radius:10px; width:70%;
-  font-size:1rem; background:#fff; outline:none;
-}
-button{
-  background:var(--pink); color:#fff; border:none; padding:12px 18px; border-radius:10px;
-  font-size:1rem; cursor:pointer; transition:.25s; box-shadow:0 5px 12px rgba(0,0,0,.2);
-}
-button:hover{transform:translateY(-1px); background:var(--pink-dark)}
-button.ghost{background:transparent; color:#333; border:1.5px solid #ddd; box-shadow:none}
-button.ghost:hover{background:#fff}
-button.accent{background:var(--pink)}
-button.small{padding:8px 12px; font-size:.9rem}
-
-/* Confetti button */
-#confettiBtn{position:fixed; bottom:20px; right:20px; background:var(--sky); z-index:5}
-
-/* Slideshow */
-.slideshow{
-  margin-top:18px; position:relative; width:100%; height:260px; overflow:hidden;
-  border-radius:16px; box-shadow:0 6px 20px rgba(0,0,0,.18);
-}
-.slideshow img{
-  position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
-  opacity:0; transition:opacity 1.4s ease-in-out;
-}
-.slideshow img.active{opacity:1}
-
-/* Love Letter */
-.letter-wrap{margin-top:22px}
-.letter-panel{
-  max-height:0; overflow:hidden; transition:max-height .6s ease, opacity .6s ease;
-  opacity:0; background:#fff; border-radius:16px; box-shadow:0 8px 22px rgba(0,0,0,.16);
-  text-align:left; padding:0 0; margin-top:10px;
-}
-.letter-panel.open{max-height:520px; opacity:1; padding:16px}
-.letter-header{display:flex; justify-content:space-between; align-items:center; margin-bottom:8px}
-.letter-header h2{margin:0; font-size:1.2rem}
-.letter-actions{display:flex; gap:8px}
-
-.letter-text{
-  white-space:pre-wrap; line-height:1.6; padding:8px 2px 8px 2px; color:#333;
-  border-left:4px solid var(--pink); padding-left:12px; position:relative;
-}
-
-/* Hearts sparkles container */
-.letter-text .heart{position:absolute; font-size:14px; opacity:.85; animation:floatUp 1.8s ease forwards}
-@keyframes floatUp{to{transform:translateY(-16px); opacity:0}}
-
-.editor-wrap{display:none; flex-direction:column; gap:10px; margin-top:8px}
-.editor-wrap.open{display:flex}
-#letterEditor{
-  width:100%; min-height:160px; padding:12px; border:1.5px solid #eee; border-radius:10px; font-size:1rem;
-}
-
-/* Print layout: only the letter */
-@media print{
-  body{background:#fff}
-  #balloonCanvas, .inputs, .slideshow, #confettiBtn, #letterBtn, .letter-actions, h1, #wish {display:none !important}
-  .card{box-shadow:none; width:100%; padding:0}
-  .letter-panel{max-height:none; opacity:1; padding:0}
-  .letter-text{border:none; padding:0}
-}
-
-/* Envelope */
+/* Envelope Styles */
 .envelope {
   position: relative;
-  width: 320px;
-  height: 200px;
+  width: 340px;
+  height: 220px;
   margin: 100px auto 30px;
   background: #ffb6c1;
   border: 2px solid #ff4d6d;
@@ -132,7 +31,7 @@ button.small{padding:8px 12px; font-size:.9rem}
 
 .envelope .letter {
   position: absolute;
-  bottom: -100%;
+  bottom: -120%;
   left: 0;
   width: 100%;
   height: 100%;
@@ -143,6 +42,7 @@ button.small{padding:8px 12px; font-size:.9rem}
   line-height: 1.5em;
   transition: bottom 1s ease;
   border-top: 3px solid #ff4d6d;
+  overflow-y: auto;
 }
 
 .envelope.open .letter {
@@ -154,9 +54,37 @@ button.small{padding:8px 12px; font-size:.9rem}
   margin-bottom: 10px;
 }
 
-/* Floating effect */
+/* Slideshow inside letter */
+.letter-slideshow {
+  margin-top: 15px;
+  position: relative;
+  max-width: 100%;
+  height: 150px;
+  overflow: hidden;
+}
+
+.letter-slideshow img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.slide {
+  display: none;
+}
+
+.fade {
+  animation: fade 1.5s;
+}
+
+@keyframes fade {
+  from { opacity: 0.4; }
+  to { opacity: 1; }
+}
+
+/* Floating Envelope Animation */
 @keyframes float {
   0%,100% { transform: translateY(0); }
   50% { transform: translateY(-10px); }
 }
-
