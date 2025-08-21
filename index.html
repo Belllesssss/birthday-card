@@ -3,36 +3,59 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Birthday!</title>
+<title>Special Birthday Surprise</title>
 <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
-  body {
-    height: 100vh;
-    width: 100vw;
+  body, html { height: 100%; width: 100%; overflow: hidden; font-family: 'Montserrat', sans-serif; }
+
+  /* Initial page styles */
+  #landing {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
     background: linear-gradient(135deg, #ffecd2, #fcb69f);
-    font-family: 'Montserrat', sans-serif;
-    overflow: hidden;
+    flex-direction: column;
+    text-align: center;
+    transition: opacity 0.5s ease;
+  }
+
+  #landing h1 {
+    font-family: 'Pacifico', cursive;
+    font-size: 3rem;
+    color: #ff4f79;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+  }
+
+  #start-btn {
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    color: white;
+    background: linear-gradient(45deg, #ff6fa3, #ffca7b);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  #start-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  }
+
+  /* Birthday card page */
+  #card-page {
+    display: none;
+    height: 100%;
+    width: 100%;
     position: relative;
+    background: linear-gradient(135deg, #ffecd2, #fcb69f);
+    overflow: hidden;
   }
 
-  /* Stars */
-  .star {
-    position: absolute;
-    width: 2px;
-    height: 2px;
-    background: white;
-    border-radius: 50%;
-    opacity: 0;
-    animation: twinkle 2s infinite alternate;
-  }
-  @keyframes twinkle {
-    0% { opacity:0; transform: scale(0.5);}
-    50% { opacity:1; transform: scale(1.2);}
-    100% { opacity:0; transform: scale(0.5);}
-  }
-
-  /* Card */
+  /* Floating card */
   .card {
     position: absolute;
     top: 50%; left: 50%;
@@ -50,198 +73,136 @@
     0%,100% { transform: translate(-50%,-50%) translateY(0px) rotate(-1deg); }
     50% { transform: translate(-50%,-50%) translateY(-10px) rotate(1deg); }
   }
-
-  h1 {
-    font-family: 'Pacifico', cursive;
-    color: #ff4f79;
-    font-size: 2.4rem;
-    margin-bottom: 15px;
-    letter-spacing: 1px;
-  }
-  p {
-    font-size: 1.1rem;
-    margin-bottom: 25px;
-    color: #555;
-  }
+  h2 { font-family: 'Pacifico', cursive; color: #ff4f79; font-size: 2.4rem; margin-bottom: 15px; }
+  p { font-size: 1.1rem; margin-bottom: 25px; color: #555; }
 
   /* Candle */
-  .candle {
-    width: 10px;
-    height: 40px;
-    background: #ffcc00;
-    margin: 0 auto 15px;
-    border-radius: 3px;
-    position: relative;
-  }
-  .flame {
-    width: 10px;
-    height: 15px;
-    background: radial-gradient(circle, #fffc00 0%, #ff7b00 70%);
-    position: absolute;
-    top: -15px;
-    left: 0;
-    border-radius: 50%;
-    animation: flicker 0.3s infinite alternate;
-  }
-  @keyframes flicker {
-    0% { transform: scale(1) translateX(0); opacity: 1; }
-    50% { transform: scale(1.2) translateX(-1px); opacity: 0.8; }
-    100% { transform: scale(0.9) translateX(1px); opacity: 1; }
-  }
+  .candle { width:10px; height:40px; background:#ffcc00; margin:0 auto 15px; border-radius:3px; position:relative; }
+  .flame { width:10px; height:15px; background: radial-gradient(circle,#fffc00 0%,#ff7b00 70%); position:absolute; top:-15px; left:0; border-radius:50%; animation:flicker 0.3s infinite alternate; }
+  @keyframes flicker { 0%{transform:scale(1) translateX(0);opacity:1;} 50%{transform:scale(1.2) translateX(-1px);opacity:0.8;} 100%{transform:scale(0.9) translateX(1px);opacity:1;} }
+
+  /* Stars */
+  .star { position:absolute; width:2px; height:2px; background:white; border-radius:50%; opacity:0; animation:twinkle 2s infinite alternate; }
+  @keyframes twinkle { 0%{opacity:0; transform:scale(0.5);} 50%{opacity:1; transform:scale(1.2);} 100%{opacity:0; transform:scale(0.5);} }
 
   /* Confetti */
-  .confetti {
-    position: absolute;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    top: -10px;
-    animation: fall linear infinite;
-  }
-  @keyframes fall {
-    to { transform: translateY(110vh) rotate(360deg); opacity: 0; }
-  }
+  .confetti { position:absolute; width:8px; height:8px; border-radius:50%; top:-10px; animation:fall linear infinite; }
+  @keyframes fall { to { transform:translateY(110vh) rotate(360deg); opacity:0;} }
 
   /* Balloons */
-  .balloon {
-    position: absolute;
-    width: 30px;
-    height: 40px;
-    border-radius: 50%;
-    opacity: 0.9;
-    animation: floatUp linear infinite;
-  }
-  @keyframes floatUp {
-    0% { transform: translateY(100vh) rotate(0deg); }
-    100% { transform: translateY(-150px) rotate(360deg); }
-  }
+  .balloon { position:absolute; width:30px; height:40px; border-radius:50%; opacity:0.9; animation: floatUp linear infinite; }
+  @keyframes floatUp { 0%{transform:translateY(100vh) rotate(0deg);} 100%{transform:translateY(-150px) rotate(360deg);} }
 
   /* Sparkles */
-  .sparkle {
-    position: absolute;
-    width: 5px;
-    height: 5px;
-    background: yellow;
-    border-radius: 50%;
-    opacity: 0;
-    animation: sparkle 1s infinite alternate;
-  }
-  @keyframes sparkle {
-    0% { opacity: 0; transform: scale(0.5);}
-    100% { opacity: 1; transform: scale(1.5);}
-  }
+  .sparkle { position:absolute; width:5px; height:5px; background:yellow; border-radius:50%; opacity:0; animation:sparkle 1s infinite alternate; }
+  @keyframes sparkle { 0%{opacity:0; transform:scale(0.5);} 100%{opacity:1; transform:scale(1.5);} }
 
   /* Floating hearts */
-  .heart {
-    position: absolute;
-    width: 15px;
-    height: 15px;
-    background: red;
-    transform: rotate(-45deg);
-    animation: floatHeart linear forwards;
-  }
-  .heart::before,
-  .heart::after {
-    content: '';
-    position: absolute;
-    width: 15px;
-    height: 15px;
-    background: red;
-    border-radius: 50%;
-  }
-  .heart::before { top: -7.5px; left: 0; }
-  .heart::after { left: 7.5px; top: 0; }
-  @keyframes floatHeart {
-    0% { transform: translateY(0) rotate(-45deg); opacity:1; }
-    100% { transform: translateY(-300px) rotate(0deg); opacity:0; }
-  }
+  .heart { position:absolute; width:15px; height:15px; background:red; transform:rotate(-45deg); animation:floatHeart linear forwards; }
+  .heart::before,.heart::after{ content:''; position:absolute; width:15px; height:15px; background:red; border-radius:50%; }
+  .heart::before{ top:-7.5px; left:0; } .heart::after{ left:7.5px; top:0; }
+  @keyframes floatHeart { 0%{ transform:translateY(0) rotate(-45deg); opacity:1; } 100%{ transform:translateY(-300px) rotate(0deg); opacity:0; } }
 </style>
 </head>
 <body>
 
-<div class="card">
-  <div class="candle"><div class="flame"></div></div>
-  <h1>Happy Birthday, Love!</h1>
-  <p>May your day be filled with laughter, love, and endless joy. You deserve the world!</p>
+<!-- Landing page -->
+<div id="landing">
+  <h1>Happy Birthday, My Love!</h1>
+  <button id="start-btn">Open Your Birthday Card 🎁</button>
 </div>
 
-<!-- Background Music -->
-<audio id="bg-music" autoplay loop>
-  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_7b50d0b2e6.mp3?filename=happy-birthday-121351.mp3" type="audio/mpeg">
-</audio>
-
-<!-- Balloon Pop Sound -->
-<audio id="pop-sound">
-  <source src="https://freesound.org/data/previews/146/146725_2615114-lq.mp3" type="audio/mpeg">
-</audio>
+<!-- Card page -->
+<div id="card-page">
+  <div class="card">
+    <div class="candle"><div class="flame"></div></div>
+    <h2>Happy Birthday, Love!</h2>
+    <p>May your day be filled with laughter, love, and endless joy. You deserve the world!</p>
+  </div>
+  <audio id="bg-music" autoplay loop>
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_7b50d0b2e6.mp3?filename=happy-birthday-121351.mp3" type="audio/mpeg">
+  </audio>
+  <audio id="pop-sound">
+    <source src="https://freesound.org/data/previews/146/146725_2615114-lq.mp3" type="audio/mpeg">
+  </audio>
+</div>
 
 <script>
+const landing = document.getElementById('landing');
+const cardPage = document.getElementById('card-page');
+const startBtn = document.getElementById('start-btn');
 const popSound = document.getElementById('pop-sound');
 
-// Stars
-for(let i=0;i<100;i++){
-  const star=document.createElement('div');
-  star.className='star';
-  star.style.left=Math.random()*window.innerWidth+'px';
-  star.style.top=Math.random()*window.innerHeight+'px';
-  star.style.animationDuration=(Math.random()*3+1)+'s';
-  document.body.appendChild(star);
+startBtn.onclick = () => {
+  landing.style.opacity = 0;
+  setTimeout(()=>{
+    landing.style.display='none';
+    cardPage.style.display='block';
+    initCardAnimations();
+  },500);
 }
 
-// Spawn magic continuously
-function spawnMagic(){
-  // Confetti
-  for(let i=0;i<5;i++){
-    const confetti=document.createElement('div');
-    confetti.className='confetti';
-    confetti.style.left=Math.random()*window.innerWidth+'px';
-    confetti.style.background=`hsl(${Math.random()*360},80%,70%)`;
-    confetti.style.width=confetti.style.height=(Math.random()*12+6)+'px';
-    confetti.style.animationDuration=(Math.random()*3+2)+'s';
-    document.body.appendChild(confetti);
-    setTimeout(()=>confetti.remove(),4000);
+function initCardAnimations(){
+  // Stars
+  for(let i=0;i<100;i++){
+    const star=document.createElement('div');
+    star.className='star';
+    star.style.left=Math.random()*window.innerWidth+'px';
+    star.style.top=Math.random()*window.innerHeight+'px';
+    star.style.animationDuration=(Math.random()*3+1)+'s';
+    cardPage.appendChild(star);
   }
 
-  // Balloons + pop + hearts
-  for(let i=0;i<2;i++){
-    const balloon=document.createElement('div');
-    balloon.className='balloon';
-    balloon.style.left=Math.random()*window.innerWidth+'px';
-    balloon.style.background=`hsl(${Math.random()*360},70%,60%)`;
-    balloon.style.animationDuration=(Math.random()*5+5)+'s';
-    document.body.appendChild(balloon);
+  // Spawn magic
+  function spawnMagic(){
+    // Confetti
+    for(let i=0;i<5;i++){
+      const confetti=document.createElement('div');
+      confetti.className='confetti';
+      confetti.style.left=Math.random()*window.innerWidth+'px';
+      confetti.style.background=`hsl(${Math.random()*360},80%,70%)`;
+      confetti.style.width=confetti.style.height=(Math.random()*12+6)+'px';
+      confetti.style.animationDuration=(Math.random()*3+2)+'s';
+      cardPage.appendChild(confetti);
+      setTimeout(()=>confetti.remove(),4000);
+    }
 
-    // Balloon pop + heart spawn
-    setTimeout(()=>{
-      popSound.currentTime=0;
-      popSound.play();
-      balloon.remove();
+    // Balloons + pop + hearts
+    for(let i=0;i<2;i++){
+      const balloon=document.createElement('div');
+      balloon.className='balloon';
+      balloon.style.left=Math.random()*window.innerWidth+'px';
+      balloon.style.background=`hsl(${Math.random()*360},70%,60%)`;
+      balloon.style.animationDuration=(Math.random()*5+5)+'s';
+      cardPage.appendChild(balloon);
 
-      // Spawn floating heart
-      const heart=document.createElement('div');
-      heart.className='heart';
-      heart.style.left=(parseInt(balloon.style.left)+10)+'px';
-      heart.style.top=(window.innerHeight-50)+'px';
-      document.body.appendChild(heart);
-      setTimeout(()=>heart.remove(),4000);
+      setTimeout(()=>{
+        popSound.currentTime=0; popSound.play();
+        balloon.remove();
 
-    }, Math.random()*5000 + 3000);
+        const heart=document.createElement('div');
+        heart.className='heart';
+        heart.style.left=(parseInt(balloon.style.left)+10)+'px';
+        heart.style.top=(window.innerHeight-50)+'px';
+        cardPage.appendChild(heart);
+        setTimeout(()=>heart.remove(),4000);
+      }, Math.random()*5000 + 3000);
+    }
+
+    // Sparkles
+    for(let i=0;i<5;i++){
+      const sparkle=document.createElement('div');
+      sparkle.className='sparkle';
+      sparkle.style.left=Math.random()*window.innerWidth+'px';
+      sparkle.style.top=Math.random()*window.innerHeight+'px';
+      sparkle.style.animationDuration=(Math.random()*2+0.5)+'s';
+      cardPage.appendChild(sparkle);
+      setTimeout(()=>sparkle.remove(),2500);
+    }
   }
 
-  // Sparkles
-  for(let i=0;i<5;i++){
-    const sparkle=document.createElement('div');
-    sparkle.className='sparkle';
-    sparkle.style.left=Math.random()*window.innerWidth+'px';
-    sparkle.style.top=Math.random()*window.innerHeight+'px';
-    sparkle.style.animationDuration=(Math.random()*2+0.5)+'s';
-    document.body.appendChild(sparkle);
-    setTimeout(()=>sparkle.remove(),2500);
-  }
+  setInterval(spawnMagic,500);
 }
-
-// Spawn magic every 500ms
-setInterval(spawnMagic,500);
 </script>
 
 </body>
