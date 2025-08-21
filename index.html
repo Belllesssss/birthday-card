@@ -1,32 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Happy Birthday!</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy Birthday 💖</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- Balloons Background -->
-  <div class="balloon" style="left:10%; background:#ff6b6b; animation-delay:0s;"></div>
-  <div class="balloon" style="left:25%; background:#feca57; animation-delay:2s;"></div>
-  <div class="balloon" style="left:40%; background:#48dbfb; animation-delay:4s;"></div>
-  <div class="balloon" style="left:60%; background:#1dd1a1; animation-delay:1s;"></div>
-  <div class="balloon" style="left:80%; background:#5f27cd; animation-delay:3s;"></div>
+  <!-- Animated Background -->
+  <canvas id="balloonCanvas"></canvas>
 
   <!-- Birthday Card -->
   <div class="card">
-    <h1>🎂 Happy Birthday! 🎉</h1>
-    <p id="wish">Wishing you a day filled with love, laughter, and joy 💖</p>
-    <input type="text" id="nameInput" placeholder="Enter your name">
-    <button onclick="showWish()">Show My Wish</button>
+    <h1>🎂 Happy Birthday, My Love 💖</h1>
+    <p id="wish">Wishing you endless happiness, love, and laughter 💕</p>
+
+    <div class="inputs">
+      <input type="text" id="nameInput" placeholder="Type your partner's name… e.g., Aiman" />
+      <button id="wishBtn" onclick="showWish()">Show My Wish</button>
+    </div>
+
+    <!-- Photo Slideshow -->
+    <div class="slideshow">
+      <!-- Replace these with your own images in /images -->
+      <img src="images/photo1.jpg" class="slide active" alt="memory 1">
+      <img src="images/photo2.jpg" class="slide" alt="memory 2">
+      <img src="images/photo3.jpg" class="slide" alt="memory 3">
+      <img src="images/photo4.jpg" class="slide" alt="memory 4">
+    </div>
+
+    <!-- Love Letter -->
+    <div class="letter-wrap">
+      <button id="letterBtn" class="accent">💌 Open Love Letter</button>
+
+      <div id="letterPanel" class="letter-panel">
+        <div class="letter-header">
+          <h2>💗 A Letter For You</h2>
+          <div class="letter-actions">
+            <button id="editToggle" class="ghost">Edit</button>
+            <button id="printBtn" class="ghost">Print</button>
+          </div>
+        </div>
+
+        <!-- Read view -->
+        <div id="letterText" class="letter-text"></div>
+
+        <!-- Edit view -->
+        <div id="editorWrap" class="editor-wrap">
+          <textarea id="letterEditor"></textarea>
+          <div class="editor-actions">
+            <button id="saveLetter" class="accent small">Save</button>
+            <button id="cancelEdit" class="ghost small">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- Confetti Button -->
   <button id="confettiBtn">🎊 Celebrate!</button>
 
-  <!-- Birthday Song -->
-  <audio id="song" src="https://www2.cs.uic.edu/~i101/SoundFiles/StarWars60.wav"></audio>
+  <!-- Background Music (royalty-free) -->
+  <audio id="song" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_3e39f4c85a.mp3?filename=happy-birthday-118273.mp3"></audio>
 
   <!-- Confetti Library -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
