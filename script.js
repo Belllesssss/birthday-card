@@ -16,9 +16,8 @@ document.getElementById("confettiBtn").addEventListener("click", () => {
   });
 });
 
-// Slideshow
+// Slideshow inside Letter
 let slideIndex = 0;
-showSlides();
 function showSlides() {
   let slides = document.getElementsByClassName("slide");
   for (let i = 0; i < slides.length; i++) {
@@ -27,10 +26,17 @@ function showSlides() {
   slideIndex++;
   if (slideIndex > slides.length) { slideIndex = 1; }
   slides[slideIndex-1].style.display = "block";
-  setTimeout(showSlides, 4000); // 4s per slide
+  setTimeout(showSlides, 4000); // Change every 4s
 }
 
-// Balloons (same as before)
+// Start slideshow only when letter opens
+envelope.addEventListener("click", () => {
+  if (envelope.classList.contains("open")) {
+    showSlides();
+  }
+});
+
+// Balloons floating (same as before)
 const canvas = document.getElementById("balloonCanvas");
 const ctx = canvas.getContext("2d");
 
