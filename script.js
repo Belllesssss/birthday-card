@@ -5,15 +5,16 @@ function showWish() {
     : "🎂 Happy Birthday! 🎉";
   document.getElementById("wish").innerText = wishText;
 
-  // play song
-  document.getElementById("song").play();
+  // Play birthday song
+  const song = document.getElementById("song");
+  song.play();
 }
 
-// Confetti celebration
+// Confetti Celebration
 document.getElementById("confettiBtn").addEventListener("click", () => {
   confetti({
     particleCount: 200,
-    spread: 100,
+    spread: 120,
     origin: { y: 0.6 }
   });
 });
